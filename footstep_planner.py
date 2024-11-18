@@ -220,6 +220,7 @@ class LipTrajPlanner(LeafSystem):
     def CalcComTraj(self, context: Context, output) -> None:
         # state = self.EvalVectorInput(context, self.robot_state_input_port_index).value()[:14]
         state = self.EvalVectorInput(context, self.robot_state_input_port_index).value()
+        
         t = context.get_time()
         fsm = get_fsm(t)
         end_time = t + time_until_switch(t)

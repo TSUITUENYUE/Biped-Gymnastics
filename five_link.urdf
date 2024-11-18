@@ -1,0 +1,326 @@
+<?xml version="1.0"?>
+<robot name="Pendulum">
+  <material name="green">
+    <color rgba=".3 .6 .4 1"/>
+  </material>
+  <material name="red">
+    <color rgba=".9 .1 0 1"/>
+  </material>
+  <material name="blue">
+    <color rgba="0 0 1 1"/>
+  </material>
+  <link drake_ignore="true" name="world">
+    <inertial>
+      <!-- drc-viewer needs this to have inertia to parse properly. Remove it when that bug is fixed. -->
+      <origin xyz="0 0 0"/>
+      <mass value="0.01"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+
+
+  <link name="base">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 .015"/>
+      <mass value="1"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 .015"/>
+      <geometry>
+        <sphere radius=".015"/>
+      </geometry>
+      <material name="green"/>
+    </visual>
+  </link>
+  <joint name="base_weld" type="fixed">
+    <parent link="world"/>
+    <child link="base"/>
+    <origin xyz="0 0 1"/>
+  </joint>
+
+  <link name="link1">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 -.5"/>
+      <mass value="0.5"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 -.375"/>
+      <geometry>
+        <cylinder length=".75" radius=".01"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 -.375"/>
+      <geometry>
+        <cylinder length=".75" radius=".01"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint1" type="continuous">
+    <parent link="base"/>
+    <child link="link1"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="link1_com">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 -0.5"/>
+      <mass value="0.5"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 -.5"/>
+      <geometry>
+        <sphere radius=".025"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -.5"/>
+      <geometry>
+        <sphere radius=".025"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="link1_weld" type="fixed">
+    <parent link="link1"/>
+    <child link="link1_com"/>
+  </joint>
+
+  <link name="link2">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 -.5"/>
+      <mass value="0.5"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 -.375"/>
+      <geometry>
+        <cylinder length=".75" radius=".01"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 -.375"/>
+      <geometry>
+        <cylinder length=".75" radius=".01"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint2" type="continuous">
+    <parent link="link1"/>
+    <child link="link2"/>
+    <origin xyz="0 0 -0.75"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="link2_com">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 -0.5"/>
+      <mass value="0.5"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 -.5"/>
+      <geometry>
+        <sphere radius=".025"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -.5"/>
+      <geometry>
+        <sphere radius=".025"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="link2_weld" type="fixed">
+    <parent link="link2"/>
+    <child link="link2_com"/>
+  </joint>
+
+  <link name="link3">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 -.5"/>
+      <mass value="0.5"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 -.375"/>
+      <geometry>
+        <cylinder length=".75" radius=".01"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 -.375"/>
+      <geometry>
+        <cylinder length=".75" radius=".01"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint3" type="continuous">
+    <parent link="link2"/>
+    <child link="link3"/>
+    <origin xyz="0 0 -0.75"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="link3_com">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 -0.5"/>
+      <mass value="0.5"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 -.5"/>
+      <geometry>
+        <sphere radius=".025"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -.5"/>
+      <geometry>
+        <sphere radius=".025"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="link3_weld" type="fixed">
+    <parent link="link3"/>
+    <child link="link3_com"/>
+  </joint>
+
+  <link name="link4">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 -.5"/>
+      <mass value="0.5"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 -.375"/>
+      <geometry>
+        <cylinder length=".75" radius=".01"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 -.375"/>
+      <geometry>
+        <cylinder length=".75" radius=".01"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint4" type="continuous">
+    <parent link="link3"/>
+    <child link="link4"/>
+    <origin xyz="0 0 -0.75"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="link4_com">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 -0.5"/>
+      <mass value="0.5"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 -.5"/>
+      <geometry>
+        <sphere radius=".025"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -.5"/>
+      <geometry>
+        <sphere radius=".025"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="link4_weld" type="fixed">
+    <parent link="link4"/>
+    <child link="link4_com"/>
+  </joint>
+
+  <link name="link5">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 -.5"/>
+      <mass value="0.5"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 -.375"/>
+      <geometry>
+        <cylinder length=".75" radius=".01"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 -.375"/>
+      <geometry>
+        <cylinder length=".75" radius=".01"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint5" type="continuous">
+    <parent link="link4"/>
+    <child link="link5"/>
+    <origin xyz="0 0 -0.75"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="link5_com">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 -0.5"/>
+      <mass value="0.5"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 -.5"/>
+      <geometry>
+        <sphere radius=".025"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -.5"/>
+      <geometry>
+        <sphere radius=".025"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="link5_weld" type="fixed">
+    <parent link="link5"/>
+    <child link="link5_com"/>
+  </joint>
+
+  <transmission name="joint1_trans" type="SimpleTransmission">
+    <actuator name="torque1"/>
+    <joint name="joint1"/>
+    <mechanicalReduction>1</mechanicalReduction>
+  </transmission>
+  <transmission name="joint2_trans" type="SimpleTransmission">
+    <actuator name="torque2"/>
+    <joint name="joint2"/>
+    <mechanicalReduction>1</mechanicalReduction>
+  </transmission>
+  <transmission name="joint3_trans" type="SimpleTransmission">
+    <actuator name="torque3"/>
+    <joint name="joint3"/>
+    <mechanicalReduction>1</mechanicalReduction>
+  </transmission>
+  <transmission name="joint4_trans" type="SimpleTransmission">
+    <actuator name="torque4"/>
+    <joint name="joint4"/>
+    <mechanicalReduction>1</mechanicalReduction>
+  </transmission>
+    <transmission name="joint5_trans" type="SimpleTransmission">
+    <actuator name="torque5"/>
+    <joint name="joint5"/>
+    <mechanicalReduction>1</mechanicalReduction>
+  </transmission>
+</robot>
